@@ -9,19 +9,28 @@
 
 <script>
 // @ is an alias to /src
-import { ref, computed } from 'vue';
+import { ref, computed, watch, watchEffect } from 'vue';
 
 export default {
   name: 'Home',
   setup() {
-    const search = ref('')
+      const search = ref('')
     const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
-
     const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value))
+      return names.value.filter(name => name.includes(search.value))
     })
-
-    return { names, search, matchingNames }
+    const stopWatch = watch(search, () => {
+      console.log('watch function ran')
+    })
+    const stopEffect = watchEffect(() => {
+      console.log('watchEffect ran', search.value)
+      console.log(names.value)
+    })
+    const handleClick = () => {
+      stopWatch()
+      stopEffect()
+    }
+    return { names, search, matchingNames, handleClick }
   },
 }
 </script>
