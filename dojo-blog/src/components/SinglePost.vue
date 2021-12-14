@@ -7,14 +7,14 @@
 
 <script>
 import { computed } from '@vue/reactivity'
+import { onMounted, onUnmounted, onUpdated } from '@vue/runtime-core'
 export default {
     name: 'SinglePost',
     props: ['post'],
     setup(props){
-        const snippet = computed(() => {
-          return props.post.body.substring(0, 100) + '...'
-        })
-        return { snippet }
+        onMounted(() => console.log('component mounted'))
+        onUnmounted(() => console.log('component unmounted'))
+        onUpdated(() => console.log('component updated'))
     }
 }
 </script>
