@@ -19,14 +19,14 @@ import { computed } from 'vue'
 
 export default {
     components: { PostList, Spinner },
-    setup(){
+    setup() {
         const route = useRoute()
         const { posts, error, load } = getPosts()
 
         load()
 
         const postsWithTag = computed(() => {
-            return posts.value.filter((p) => p.tags.includes(route.params.tags))
+            return posts.value.filter(p => p.tags.includes(route.params.tag))
         })
         return { error, posts, postsWithTag }
     }
